@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import PublicSite from "./pages/PublicSite";
 import AdminLogin from "./pages/AdminLogin";
 import AdminPanel from "./pages/AdminPanel";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -11,7 +12,14 @@ export default function App() {
 
       <Route path="/admin" element={<AdminLogin />} />
 
-      <Route path="/admin/panel" element={<AdminPanel />} />
+      <Route
+        path="/admin/panel"
+        element={
+          <ProtectedRoute>
+            <AdminPanel />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

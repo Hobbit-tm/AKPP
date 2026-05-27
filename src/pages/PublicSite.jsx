@@ -19,6 +19,7 @@ export default function PublicSite() {
       <Prices />
       <Reviews />
       <ContactSection />
+      {/* <Map2GIS /> */}
 
       <FloatingButtons />
     </>

@@ -5,30 +5,32 @@ const API_BASE = import.meta.env.VITE_API_URL || "";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
-
   const [password, setPassword] = useState("");
 
   async function login(e) {
     e.preventDefault();
 
-    const response = await fetch(`${API_BASE}/api/admin/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ password }),
-    });
+    try {
+      const response = await fetch(`${API_BASE}/api/admin/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      alert(data.error || "Ошибка");
-      return;
+      if (!response.ok) {
+        alert(data.error || "Ошибка");
+        return;
+      }
+
+      sessionStorage.setItem("admin_token", data.token);
+      navigate("/admin/panel");
+    } catch (error) {
+      alert("Не удалось подключиться к серверу");
     }
-
-    localStorage.setItem("admin_token", data.token);
-
-    navigate("/admin/panel");
   }
 
   return (

@@ -105,8 +105,8 @@ function RatingPicker({ value, hoverValue, onChange, onHover, size = "md" }) {
             aria-label={`Поставить ${rating} ${rating === 1 ? "звезду" : rating < 5 ? "звезды" : "звёзд"}`}
             className={`${starClass} leading-none transition duration-150 ${
               isActive
-                ? "text-amber-400 drop-shadow-sm scale-110"
-                : "text-slate-300 hover:text-amber-300"
+                ? "text-amber-500 drop-shadow-sm scale-110"
+                : "text-slate-500 hover:text-amber-300"
             }`}
           >
             ★
