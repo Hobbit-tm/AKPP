@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "Алексей",
+    "text": "Хороший сервис, сделали быстро и без лишнего.",
+    "rating": 5,
+    "photos": [],
+    "verified": true,
+    "helpful": 0,
+    "status": "approved",
+    "createdAt": "2026-05-18T00:00:00.000Z"
+  }
+]
