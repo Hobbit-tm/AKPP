@@ -7,6 +7,8 @@ import Prices from "../components/Prices";
 import Reviews from "../components/Reviews";
 import ContactSection from "../components/ContactSection";
 import FloatingButtons from "../components/FloatingButtons";
+import Map2GIS from "../components/Map2GIS";
+import Footer from "../components/Footer";
 
 export default function PublicSite() {
   return (
@@ -19,9 +21,10 @@ export default function PublicSite() {
       <Prices />
       <Reviews />
       <ContactSection />
-      {/* <Map2GIS /> */}
+      <Map2GIS />
 
       <FloatingButtons />
+      <Footer />
     </>
   );
 }

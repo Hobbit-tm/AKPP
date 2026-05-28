@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
-const TOKEN_KEY = "adminToken";
+const TOKEN_KEY = "admin_token";
 
 async function apiRequest(path, options = {}, token = "") {
   const response = await fetch(`${API_BASE}${path}`, {

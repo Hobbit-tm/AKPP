@@ -17,9 +17,9 @@ export default function Map2GIS() {
         if (cancelled) return;
 
         mapInstanceRef.current = new mapgl.Map(mapNodeRef.current, {
-          key: "YOUR_2GIS_API_KEY",
-          center: [76.889709, 43.238293],
-          zoom: 13,
+          key: import.meta.env.VITE_2GIS_KEY,
+          center: [76.839419, 43.198872],
+          zoom: 20,
         });
       } catch (error) {
         console.error("2GIS map error:", error);

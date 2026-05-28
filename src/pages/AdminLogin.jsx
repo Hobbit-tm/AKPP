@@ -26,7 +26,7 @@ export default function AdminLogin() {
         return;
       }
 
-      sessionStorage.setItem("admin_token", data.token);
+      localStorage.setItem("admin_token", data.token);
       navigate("/admin/panel");
     } catch (error) {
       alert("Не удалось подключиться к серверу");
