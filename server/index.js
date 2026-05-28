@@ -81,7 +81,8 @@ CREATE TABLE IF NOT EXISTS reviews (
 `);
 
 async function initDb() {
-  await pool.query(`
+  async function initDb() {
+    await pool.query(`
     CREATE TABLE IF NOT EXISTS reviews (
       id BIGSERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -94,6 +95,23 @@ async function initDb() {
       helpful INTEGER NOT NULL DEFAULT 0
     );
   `);
+
+    await pool.query(
+      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS email TEXT;`,
+    );
+    await pool.query(
+      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'pending';`,
+    );
+    await pool.query(
+      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS reply TEXT NOT NULL DEFAULT '';`,
+    );
+    await pool.query(
+      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`,
+    );
+    await pool.query(
+      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS helpful INTEGER NOT NULL DEFAULT 0;`,
+    );
+  }
 }
 
 function normalizeReview(row) {
