@@ -68,6 +68,18 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+pool.query(`
+CREATE TABLE IF NOT EXISTS reviews (
+  id SERIAL PRIMARY KEY,
+  author TEXT,
+  email TEXT,
+  text TEXT,
+  rating INTEGER DEFAULT 5,
+  approved BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT NOW()
+)
+`);
+
 async function initDb() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS reviews (

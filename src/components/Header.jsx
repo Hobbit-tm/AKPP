@@ -7,6 +7,7 @@ const navItems = [
   { label: "Цены", id: "prices" },
   { label: "Отзывы", id: "reviews" },
   { label: "Контакты", id: "contacts" },
+  // { label: "Карта", id: "map" },
 ];
 
 export default function Header() {
