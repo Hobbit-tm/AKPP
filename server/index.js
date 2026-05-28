@@ -383,15 +383,37 @@ app.use((_req, res) => {
 
 async function start() {
   try {
-    await initDb();
+    async function initDb() {
+      await pool.query(`
+    CREATE TABLE IF NOT EXISTS reviews (
+      id BIGSERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT,
+      text TEXT NOT NULL,
+      rating INTEGER NOT NULL DEFAULT 5,
+      status TEXT NOT NULL DEFAULT 'pending',
+      reply TEXT NOT NULL DEFAULT '',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      helpful INTEGER NOT NULL DEFAULT 0
+    );
+  `);
 
-    await pool.query("SELECT NOW()");
-
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-
-      console.log("PostgreSQL connected");
-    });
+      await pool.query(
+        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS email TEXT;`,
+      );
+      await pool.query(
+        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'pending';`,
+      );
+      await pool.query(
+        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS reply TEXT NOT NULL DEFAULT '';`,
+      );
+      await pool.query(
+        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`,
+      );
+      await pool.query(
+        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS helpful INTEGER NOT NULL DEFAULT 0;`,
+      );
+    }
   } catch (error) {
     console.error("Failed to start server:", error);
     process.exit(1);
