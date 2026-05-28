@@ -68,21 +68,8 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-pool.query(`
-CREATE TABLE IF NOT EXISTS reviews (
-  id SERIAL PRIMARY KEY,
-  author TEXT,
-  email TEXT,
-  text TEXT,
-  rating INTEGER DEFAULT 5,
-  approved BOOLEAN DEFAULT true,
-  created_at TIMESTAMP DEFAULT NOW()
-)
-`);
-
 async function initDb() {
-  async function initDb() {
-    await pool.query(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS reviews (
       id BIGSERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -96,21 +83,20 @@ async function initDb() {
     );
   `);
 
-    await pool.query(
-      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS email TEXT;`,
-    );
-    await pool.query(
-      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'pending';`,
-    );
-    await pool.query(
-      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS reply TEXT NOT NULL DEFAULT '';`,
-    );
-    await pool.query(
-      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`,
-    );
-    await pool.query(
-      `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS helpful INTEGER NOT NULL DEFAULT 0;`,
-    );
+  const migrations = [
+    `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS email TEXT`,
+    `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'pending'`,
+    `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS reply TEXT NOT NULL DEFAULT ''`,
+    `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`,
+    `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS helpful INTEGER NOT NULL DEFAULT 0`,
+  ];
+
+  for (const sql of migrations) {
+    try {
+      await pool.query(sql);
+    } catch (error) {
+      console.warn("Migration warning:", error.message);
+    }
   }
 }
 
@@ -161,7 +147,6 @@ app.get("/api/reviews", async (_req, res) => {
     res.json(result.rows.map(normalizeReview));
   } catch (error) {
     console.error("GET /api/reviews error:", error);
-
     res.status(500).json({
       error: "Не удалось загрузить отзывы",
     });
@@ -180,7 +165,6 @@ app.post("/api/reviews", async (req, res) => {
     }
 
     const reviewName = String(name || "Клиент").trim() || "Клиент";
-
     const reviewRating = Math.max(1, Math.min(5, Number(rating) || 5));
 
     const result = await pool.query(
@@ -212,13 +196,13 @@ app.patch("/api/reviews/:id/approve", authMiddleware, async (req, res) => {
 
     const result = await pool.query(
       `
-        UPDATE reviews
-        SET status = 'approved'
-        WHERE id = $1
-        RETURNING
-        id, name, email, text, rating,
-        status, reply, created_at, helpful
-        `,
+      UPDATE reviews
+      SET status = 'approved'
+      WHERE id = $1
+      RETURNING
+      id, name, email, text, rating,
+      status, reply, created_at, helpful
+      `,
       [id],
     );
 
@@ -233,7 +217,6 @@ app.patch("/api/reviews/:id/approve", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.error("PATCH /api/reviews/:id/approve error:", error);
-
     res.status(500).json({
       error: "Не удалось одобрить отзыв",
     });
@@ -246,13 +229,13 @@ app.patch("/api/reviews/:id/reject", authMiddleware, async (req, res) => {
 
     const result = await pool.query(
       `
-        UPDATE reviews
-        SET status = 'rejected'
-        WHERE id = $1
-        RETURNING
-        id, name, email, text, rating,
-        status, reply, created_at, helpful
-        `,
+      UPDATE reviews
+      SET status = 'rejected'
+      WHERE id = $1
+      RETURNING
+      id, name, email, text, rating,
+      status, reply, created_at, helpful
+      `,
       [id],
     );
 
@@ -267,7 +250,6 @@ app.patch("/api/reviews/:id/reject", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.error("PATCH /api/reviews/:id/reject error:", error);
-
     res.status(500).json({
       error: "Не удалось отклонить отзыв",
     });
@@ -277,7 +259,6 @@ app.patch("/api/reviews/:id/reject", authMiddleware, async (req, res) => {
 app.patch("/api/reviews/:id/reply", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-
     const reply = String(req.body?.reply || "").trim();
 
     if (!reply) {
@@ -288,13 +269,13 @@ app.patch("/api/reviews/:id/reply", authMiddleware, async (req, res) => {
 
     const result = await pool.query(
       `
-        UPDATE reviews
-        SET reply = $2
-        WHERE id = $1
-        RETURNING
-        id, name, email, text, rating,
-        status, reply, created_at, helpful
-        `,
+      UPDATE reviews
+      SET reply = $2
+      WHERE id = $1
+      RETURNING
+      id, name, email, text, rating,
+      status, reply, created_at, helpful
+      `,
       [id, reply],
     );
 
@@ -309,7 +290,6 @@ app.patch("/api/reviews/:id/reply", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.error("PATCH /api/reviews/:id/reply error:", error);
-
     res.status(500).json({
       error: "Не удалось сохранить ответ",
     });
@@ -322,13 +302,13 @@ app.post("/api/reviews/:id/helpful", async (req, res) => {
 
     const result = await pool.query(
       `
-        UPDATE reviews
-        SET helpful = helpful + 1
-        WHERE id = $1
-        RETURNING
-        id, name, email, text, rating,
-        status, reply, created_at, helpful
-        `,
+      UPDATE reviews
+      SET helpful = helpful + 1
+      WHERE id = $1
+      RETURNING
+      id, name, email, text, rating,
+      status, reply, created_at, helpful
+      `,
       [id],
     );
 
@@ -343,7 +323,6 @@ app.post("/api/reviews/:id/helpful", async (req, res) => {
     });
   } catch (error) {
     console.error("POST /api/reviews/:id/helpful error:", error);
-
     res.status(500).json({
       error: "Не удалось обновить счётчик полезности",
     });
@@ -368,7 +347,6 @@ app.delete("/api/reviews/:id", authMiddleware, async (req, res) => {
     res.json({ ok: true });
   } catch (error) {
     console.error("DELETE /api/reviews/:id error:", error);
-
     res.status(500).json({
       error: "Не удалось удалить отзыв",
     });
@@ -383,37 +361,13 @@ app.use((_req, res) => {
 
 async function start() {
   try {
-    async function initDb() {
-      await pool.query(`
-    CREATE TABLE IF NOT EXISTS reviews (
-      id BIGSERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT,
-      text TEXT NOT NULL,
-      rating INTEGER NOT NULL DEFAULT 5,
-      status TEXT NOT NULL DEFAULT 'pending',
-      reply TEXT NOT NULL DEFAULT '',
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      helpful INTEGER NOT NULL DEFAULT 0
-    );
-  `);
+    await initDb();
+    await pool.query("SELECT NOW()");
 
-      await pool.query(
-        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS email TEXT;`,
-      );
-      await pool.query(
-        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'pending';`,
-      );
-      await pool.query(
-        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS reply TEXT NOT NULL DEFAULT '';`,
-      );
-      await pool.query(
-        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`,
-      );
-      await pool.query(
-        `ALTER TABLE reviews ADD COLUMN IF NOT EXISTS helpful INTEGER NOT NULL DEFAULT 0;`,
-      );
-    }
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+      console.log("PostgreSQL connected");
+    });
   } catch (error) {
     console.error("Failed to start server:", error);
     process.exit(1);
