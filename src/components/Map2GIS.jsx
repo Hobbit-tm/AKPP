@@ -24,7 +24,7 @@ export default function Map2GIS() {
         mapInstanceRef.current = new mapgl.Map(mapNodeRef.current, {
           key,
           center: [76.839419, 43.198872],
-          zoom: 20,
+          zoom: 17,
         });
       } catch (error) {
         console.error("2GIS map error:", error);
