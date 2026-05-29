@@ -12,12 +12,17 @@ export default function Map2GIS() {
       try {
         if (!mapNodeRef.current) return;
 
-        const mapgl = await load();
+        const key = import.meta.env.VITE_2GIS_KEY;
+        if (!key) {
+          console.error("2GIS key is missing: VITE_2GIS_KEY");
+          return;
+        }
 
+        const mapgl = await load();
         if (cancelled) return;
 
         mapInstanceRef.current = new mapgl.Map(mapNodeRef.current, {
-          key: import.meta.env.VITE_2GIS_KEY,
+          key,
           center: [76.839419, 43.198872],
           zoom: 20,
         });
