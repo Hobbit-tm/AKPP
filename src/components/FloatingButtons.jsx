@@ -9,7 +9,7 @@ import {
 export default function FloatingButtons() {
   const [open, setOpen] = useState(false);
 
-  const phoneNumber = "77718721040";
+  const phoneNumber = "+77718721040";
   const whatsappMessage = "Здравствуйте! Хочу узнать подробнее о ремонте АКПП.";
 
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
