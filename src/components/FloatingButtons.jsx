@@ -16,30 +16,38 @@ export default function FloatingButtons() {
     whatsappMessage,
   )}`;
   const phoneLink = `tel:${phoneNumber}`;
-  const routeLink = "https://2gis.kz/almaty?m=76.839419%2C43.198872%2F17";
+
+  const openRoute = () => {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    const url = isMobile
+      ? "dgis://2gis.ru/routeSearch/rsType/car/to/76.839419,43.198872"
+      : "https://2gis.kz/almaty/search/Садовый%20бульвар%201ж";
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       <div
-        className={`flex flex-col items-end gap-3 transition-all duration-300 ${
+        className={`mb-3 flex flex-col items-end gap-3 transition-all duration-300 ${
           open
-            ? "pointer-events-auto opacity-100 translate-y-0"
-            : "pointer-events-none opacity-0 translate-y-4"
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-4 opacity-0"
         }`}
       >
-        <a
-          href={routeLink}
-          target="_blank"
-          rel="noreferrer"
-          className="group flex h-14 w-14 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg transition-transform duration-200 hover:scale-110 animate-pulse"
+        <button
+          type="button"
+          onClick={openRoute}
+          className="group flex h-16 w-16 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg transition-transform duration-200 hover:scale-110 animate-pulse"
           aria-label="Построить маршрут"
         >
           <FaMapMarkerAlt className="text-2xl" />
-        </a>
+        </button>
 
         <a
           href={phoneLink}
-          className="group flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform duration-200 hover:scale-110 animate-pulse"
+          className="group flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform duration-200 hover:scale-110 animate-pulse"
           aria-label="Позвонить"
         >
           <FaPhoneAlt className="text-2xl" />
@@ -49,7 +57,7 @@ export default function FloatingButtons() {
           href={whatsappLink}
           target="_blank"
           rel="noreferrer"
-          className="group flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform duration-200 hover:scale-110 animate-pulse"
+          className="group flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform duration-200 hover:scale-110 animate-pulse"
           aria-label="Написать в WhatsApp"
         >
           <FaWhatsapp className="text-3xl" />
