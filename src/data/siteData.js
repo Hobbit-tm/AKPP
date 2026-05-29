@@ -19,7 +19,7 @@ export const navItems = [
 export const stats = [
   { value: "12+", label: "лет опыта" },
   { value: "Услуга", label: "разбора только АКПП" },
-  { value: "1-днь", label: "на диагностику" },
+  { value: "1-дeнь", label: "на диагностику" },
   { value: "Гарантия", label: " от 3 месяцев до 1 года" },
 ];
 
