@@ -58,18 +58,28 @@ export default function ContactSection() {
               <PhoneCall className="h-5 w-5 text-orange-300" />
               <span>+7 (771) 872 10 40 </span>
             </a>
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <a
+              href="#map2gis"
+              className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+            >
               <MapPin className="h-5 w-5 text-orange-300" />
               <span>г. Алматы, ул. Садовый бульвар 1ж</span>
-            </div>
+            </a>
           </div>
 
-          <a
-            href="#contacts-form"
+          <button
+            type="button"
+            onClick={() =>
+              document.getElementById("contacts-form")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              })
+            }
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-600"
           >
-            Оставить заявку <ArrowRight className="h-4 w-4" />
-          </a>
+            Оставить заявку
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
 
         <div

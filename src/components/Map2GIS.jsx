@@ -42,5 +42,9 @@ export default function Map2GIS() {
     };
   }, []);
 
-  return <div ref={mapNodeRef} style={{ width: "100%", height: "400px" }} />;
+  return (
+    <div id="map2gis">
+      <div ref={mapNodeRef} style={{ width: "100%", height: "400px" }} />
+    </div>
+  );
 }
