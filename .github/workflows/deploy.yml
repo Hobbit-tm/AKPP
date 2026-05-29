@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: VITE_2GIS_KEY=77633535-0157-4dda-96df-22a9e463f7d2
+    VITE_2GIS_KEY: ${{ secrets.VITE_2GIS_KEY }}2
     VITE_API_URL: https://akpp-backend.onrender.com
 
     steps:
