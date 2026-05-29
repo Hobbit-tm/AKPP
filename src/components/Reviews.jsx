@@ -444,7 +444,7 @@ export default function Reviews() {
           ) : null}
 
           <div className="grid gap-8 xl:grid-cols-[minmax(0,1.25fr)_minmax(360px,0.75fr)]">
-            <div className="space-y-4">
+            <div className="max-h-[800px] space-y-4 overflow-y-auto pr-3 scrollbar-thin">
               {loading ? (
                 <div className="grid gap-4">
                   <LoadingCard />
