@@ -17,8 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      VITE_API_URL: https://akpp-backend.onrender.com
+    env: VITE_2GIS_KEY=77633535-0157-4dda-96df-22a9e463f7d2
+    VITE_API_URL: https://akpp-backend.onrender.com
 
     steps:
       - name: Checkout
