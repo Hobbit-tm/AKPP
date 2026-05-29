@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ArrowRight, MapPin, PhoneCall } from "lucide-react";
 
-const WHATSAPP_NUMBER = "77718721040"; // без +, пробелов и скобок
+const WHATSAPP_NUMBER = "+77718721040"; // без +, пробелов и скобок
 
 const initialForm = {
   name: "",
