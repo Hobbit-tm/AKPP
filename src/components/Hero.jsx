@@ -103,9 +103,15 @@ export default function Hero() {
               </InfoCard>
               <InfoCard className="bg-slate-50 p-4 shadow-none">
                 <p className="text-sm text-slate-500">Адрес сервиса</p>
-                <p className="mt-2 text-lg font-bold">
-                  г. Алматы, ул. Садовый бульвар 1ж
-                </p>
+
+                <a
+                  href="https://2gis.kz/almaty?m=76.839419%2C43.198872%2F17"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 flex items-center gap-2 text-lg font-bold text-slate-900 transition hover:text-orange-500"
+                >
+                  📍 г. Алматы, ул. Садовый бульвар 1ж
+                </a>
               </InfoCard>
             </div>
           </div>
