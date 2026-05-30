@@ -296,7 +296,14 @@ export default function Reviews() {
     e.preventDefault();
 
     const name = form.name.trim() || "Клиент";
+    const email = form.email.trim();
     const text = form.text.trim();
+
+    if (!email) {
+      setError("Укажите email для отправки отзыва.");
+      return;
+    }
+
     if (!text) return;
 
     setError("");
@@ -498,6 +505,7 @@ export default function Reviews() {
                     }
                     placeholder="Ваш email"
                     className={inputClass}
+                    required
                   />
 
                   <textarea
