@@ -167,6 +167,23 @@ app.post("/api/reviews", async (req, res) => {
     const reviewName = String(name || "Клиент").trim() || "Клиент";
     const reviewRating = Math.max(1, Math.min(5, Number(rating) || 5));
 
+    const reviewEmail = String(email || "")
+      .trim()
+      .toLowerCase();
+
+    if (!reviewEmail) {
+      return res.status(400).json({
+        error: "Email обязателен",
+      });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(reviewEmail)) {
+      return res.status(400).json({
+        error: "Некорректный email",
+      });
+    }
+
     const result = await pool.query(
       `
       INSERT INTO reviews
@@ -176,7 +193,7 @@ app.post("/api/reviews", async (req, res) => {
       id, name, email, text, rating,
       status, reply, created_at, helpful
       `,
-      [reviewName, String(email || "").trim(), reviewText, reviewRating],
+      [reviewName, reviewEmail, reviewText, reviewRating],
     );
 
     res.status(201).json({
