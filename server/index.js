@@ -13,19 +13,21 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
+const allowedOrigins = (
+  process.env.CORS_ORIGIN || "http://localhost:5173,http://127.0.0.1:5173"
+)
+  .split(",")
+  .map((s) => s.trim());
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://127.0.0.1:5173",
-      "https://hobbit-tm.github.io",
-    ],
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "682818";
-const JWT_SECRET = process.env.JWT_SECRET || "my_super_secret_key_2026";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
