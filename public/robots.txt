@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akpp.onrender.com/sitemap.xml
