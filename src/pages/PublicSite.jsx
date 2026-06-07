@@ -21,9 +21,12 @@ export default function PublicSite() {
       <Steps />
       <Prices />
       <Reviews />
+
+      <Faq />
+
       <ContactSection />
       <Map2GIS />
-      <Faq />
+
       <FloatingButtons />
       <Footer />
     </>
