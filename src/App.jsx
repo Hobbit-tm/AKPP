@@ -4,7 +4,6 @@ import PublicSite from "./pages/PublicSite";
 import AdminLogin from "./pages/AdminLogin";
 import AdminPanel from "./pages/AdminPanel";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Faq from "./components/Faq";
 
 export default function App() {
   return (

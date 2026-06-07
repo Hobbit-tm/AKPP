@@ -9,6 +9,7 @@ import ContactSection from "../components/ContactSection";
 import FloatingButtons from "../components/FloatingButtons";
 import Map2GIS from "../components/Map2GIS";
 import Footer from "../components/Footer";
+import Faq from "../components/Faq";
 
 export default function PublicSite() {
   return (
@@ -22,7 +23,7 @@ export default function PublicSite() {
       <Reviews />
       <ContactSection />
       <Map2GIS />
-
+      <Faq />
       <FloatingButtons />
       <Footer />
     </>
