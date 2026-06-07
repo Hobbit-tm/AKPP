@@ -14,14 +14,14 @@ export default function Hero() {
             Диагностика, ремонт и обслуживание АКПП
           </div>
 
+          <h1 className="mt-6 max-w-xl text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            Ремонт АКПП, DSG и вариаторов CVT в Алматы
+          </h1>
+
           <p className="mt-6 max-w-xl text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Диагностика АКПП, замена масла, ремонт DSG и CVT, восстановление
             гидроблоков и мехатроников с гарантией.
           </p>
-
-          <h1 className="mt-6 max-w-xl text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-            Ремонт АКПП, DSG и вариаторов CVT в Алматы
-          </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
             Проводим точную диагностику, объясняем причину поломки и
