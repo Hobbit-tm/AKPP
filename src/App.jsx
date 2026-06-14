@@ -23,6 +23,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<PublicSite />} />
+      <Route path="/index.html" element={<PublicSite />} />
+
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/diagnostika-akpp" element={<DiagnostikaAKPP />} />
       <Route path="/remont-dsg" element={<RemontDSG />} />
@@ -50,7 +52,8 @@ export default function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/index.html" element={<PublicSite />} />
+
+      <Route path="*" element={<PublicSite />} />
     </Routes>
   );
 }
