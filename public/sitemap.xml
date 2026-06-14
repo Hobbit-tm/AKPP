@@ -1,42 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://remont-akpp.kz/</loc>
-  </url>
- <url>
-  <loc>https://remont-akpp.kz/remont-akpp-toyota</loc>
+
+<url>
+<loc>https://remont-akpp.kz/</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-lexus</loc>
+<loc>https://remont-akpp.kz/diagnostika-akpp</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-hyundai</loc>
+<loc>https://remont-akpp.kz/remont-dsg</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-kia</loc>
+<loc>https://remont-akpp.kz/remont-cvt</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-volkswagen</loc>
+<loc>https://remont-akpp.kz/zamena-masla-akpp</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-audi</loc>
+<loc>https://remont-akpp.kz/remont-akpp-toyota</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-skoda</loc>
+<loc>https://remont-akpp.kz/remont-akpp-lexus</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-bmw</loc>
+<loc>https://remont-akpp.kz/remont-akpp-hyundai</loc>
 </url>
 
 <url>
-  <loc>https://remont-akpp.kz/remont-akpp-mercedes</loc>
+<loc>https://remont-akpp.kz/remont-akpp-kia</loc>
+</url>
+
+<url>
+<loc>https://remont-akpp.kz/remont-akpp-volkswagen</loc>
+</url>
+
+<url>
+<loc>https://remont-akpp.kz/remont-akpp-audi</loc>
+</url>
+
+<url>
+<loc>https://remont-akpp.kz/remont-akpp-skoda</loc>
+</url>
+
+<url>
+<loc>https://remont-akpp.kz/remont-akpp-bmw</loc>
+</url>
+
+<url>
+<loc>https://remont-akpp.kz/remont-akpp-mercedes</loc>
 </url>
 
 </urlset>
