@@ -50,6 +50,7 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/index.html" element={<PublicSite />} />
     </Routes>
   );
 }
