@@ -10,6 +10,7 @@ import FloatingButtons from "../components/FloatingButtons";
 import Map2GIS from "../components/Map2GIS";
 import Footer from "../components/Footer";
 import Faq from "../components/Faq";
+import SeoContent from "../components/SeoContent";
 
 export default function PublicSite() {
   return (
@@ -23,6 +24,8 @@ export default function PublicSite() {
       <Reviews />
 
       <Faq />
+
+      <SeoContent />
 
       <ContactSection />
       <Map2GIS />
